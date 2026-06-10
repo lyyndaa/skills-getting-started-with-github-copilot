@@ -74,6 +74,42 @@ activities = {
         "schedule": "Fridays, 3:30 PM - 5:00 PM",
         "max_participants": 18,
         "participants": ["ethan@mergington.edu", "zoe@mergington.edu"]
+    },
+    "Volleyball Team": {
+        "description": "Join the school volleyball team for training and matches",
+        "schedule": "Tuesdays and Fridays, 4:00 PM - 5:30 PM",
+        "max_participants": 14,
+        "participants": ["hannah@mergington.edu", "jacob@mergington.edu"]
+    },
+    "Tennis Club": {
+        "description": "Learn tennis techniques and compete in friendly tournaments",
+        "schedule": "Mondays and Wednesdays, 3:30 PM - 5:00 PM",
+        "max_participants": 12,
+        "participants": ["luke@mergington.edu", "grace@mergington.edu"]
+    },
+    "Music Band": {
+        "description": "Play instruments and perform in school concerts and events",
+        "schedule": "Tuesdays and Thursdays, 4:30 PM - 5:30 PM",
+        "max_participants": 25,
+        "participants": ["mason@mergington.edu", "chloe@mergington.edu"]
+    },
+    "Photography Club": {
+        "description": "Learn photography techniques and showcase creative work",
+        "schedule": "Wednesdays, 3:30 PM - 5:00 PM",
+        "max_participants": 15,
+        "participants": ["noah@mergington.edu", "sophia@mergington.edu"]
+    },
+    "Debate Team": {
+        "description": "Develop argumentation skills and compete in debate competitions",
+        "schedule": "Thursdays, 3:30 PM - 5:00 PM",
+        "max_participants": 16,
+        "participants": ["aiden@mergington.edu", "isabella@mergington.edu"]
+    },
+    "Model United Nations": {
+        "description": "Represent countries and develop diplomacy and public speaking skills",
+        "schedule": "Mondays, 3:30 PM - 5:00 PM",
+        "max_participants": 20,
+        "participants": ["ben@mergington.edu", "claire@mergington.edu"]
     }
 }
 
