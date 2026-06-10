@@ -3,6 +3,8 @@ High School Management System API
 
 A super simple FastAPI application that allows students to view and sign up
 for extracurricular activities at Mergington High School.
+
+Updated to trigger Step 2 workflow with proper permissions and token configuration.
 """
 
 from fastapi import FastAPI, HTTPException
