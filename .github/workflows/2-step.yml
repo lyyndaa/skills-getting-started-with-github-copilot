@@ -11,6 +11,7 @@ permissions:
   actions: write
   issues: write
   pull-requests: write
+  id-token: write
 
 env:
   STEP_3_FILE: ".github/steps/3-step.md"
