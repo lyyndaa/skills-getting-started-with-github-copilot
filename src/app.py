@@ -81,6 +81,12 @@ activities = {
         "max_participants": 14,
         "participants": ["hannah@mergington.edu", "jacob@mergington.edu"]
     },
+    "Soccer Team": {
+        "description": "Join the school soccer team for practices and league play",
+        "schedule": "Wednesdays and Saturdays, 4:00 PM - 6:00 PM",
+        "max_participants": 18,
+        "participants": ["natalie@mergington.edu", "ryan@mergington.edu"]
+    },
     "Tennis Club": {
         "description": "Learn tennis techniques and compete in friendly tournaments",
         "schedule": "Mondays and Wednesdays, 3:30 PM - 5:00 PM",
@@ -93,17 +99,41 @@ activities = {
         "max_participants": 25,
         "participants": ["mason@mergington.edu", "chloe@mergington.edu"]
     },
+    "Dance Ensemble": {
+        "description": "Learn choreography, rehearse dance routines, and perform together",
+        "schedule": "Fridays, 4:00 PM - 6:00 PM",
+        "max_participants": 20,
+        "participants": ["zoey@mergington.edu", "ethan@mergington.edu"]
+    },
     "Photography Club": {
         "description": "Learn photography techniques and showcase creative work",
         "schedule": "Wednesdays, 3:30 PM - 5:00 PM",
         "max_participants": 15,
         "participants": ["noah@mergington.edu", "sophia@mergington.edu"]
     },
+    "Ceramics Club": {
+        "description": "Create pottery, sculptures, and ceramic artworks in a studio setting",
+        "schedule": "Mondays, 3:30 PM - 5:00 PM",
+        "max_participants": 14,
+        "participants": ["isla@mergington.edu", "miles@mergington.edu"]
+    },
     "Debate Team": {
         "description": "Develop argumentation skills and compete in debate competitions",
         "schedule": "Thursdays, 3:30 PM - 5:00 PM",
         "max_participants": 16,
         "participants": ["aiden@mergington.edu", "isabella@mergington.edu"]
+    },
+    "Robotics Club": {
+        "description": "Design, build, and program robots for school competitions",
+        "schedule": "Thursdays, 3:30 PM - 5:30 PM",
+        "max_participants": 16,
+        "participants": ["ryan@mergington.edu", "emma@mergington.edu"]
+    },
+    "Literature Circle": {
+        "description": "Read and discuss books, poems, and creative writing together",
+        "schedule": "Wednesdays, 4:00 PM - 5:30 PM",
+        "max_participants": 18,
+        "participants": ["mia@mergington.edu", "leo@mergington.edu"]
     },
     "Model United Nations": {
         "description": "Represent countries and develop diplomacy and public speaking skills",
