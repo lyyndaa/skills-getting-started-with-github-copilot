@@ -7,7 +7,7 @@ on:
       - "src/app.py"
 
 permissions:
-  contents: read
+  contents: write
   actions: write
   issues: write
   pull-requests: write
