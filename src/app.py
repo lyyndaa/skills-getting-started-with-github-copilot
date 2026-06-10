@@ -3,6 +3,8 @@ High School Management System API
 
 A super simple FastAPI application that allows students to view and sign up
 for extracurricular activities at Mergington High School.
+
+Updated to trigger Step 2 workflow with proper permissions and token configuration.
 """
 
 from fastapi import FastAPI, HTTPException
@@ -13,6 +15,9 @@ from pathlib import Path
 
 app = FastAPI(title="Mergington High School API",
               description="API for viewing and signing up for extracurricular activities")
+
+# Small update to retrigger Step 2 workflow
+# This comment is intentionally harmless and only exists to force a new push
 
 # Mount the static files directory
 current_dir = Path(__file__).parent
@@ -38,6 +43,108 @@ activities = {
         "schedule": "Mondays, Wednesdays, Fridays, 2:00 PM - 3:00 PM",
         "max_participants": 30,
         "participants": ["john@mergington.edu", "olivia@mergington.edu"]
+    },
+    "Basketball Team": {
+        "description": "Join the school basketball team for practices and games",
+        "schedule": "Mondays and Thursdays, 4:00 PM - 6:00 PM",
+        "max_participants": 15,
+        "participants": ["jason@mergington.edu", "sara@mergington.edu"]
+    },
+    "Swimming Club": {
+        "description": "Swim laps, learn strokes, and improve aquatic fitness",
+        "schedule": "Wednesdays and Fridays, 3:00 PM - 4:30 PM",
+        "max_participants": 18,
+        "participants": ["nina@mergington.edu", "tyler@mergington.edu"]
+    },
+    "Art Studio": {
+        "description": "Explore painting, drawing, and creative mixed media projects",
+        "schedule": "Tuesdays, 3:30 PM - 5:00 PM",
+        "max_participants": 16,
+        "participants": ["ava@mergington.edu", "lucas@mergington.edu"]
+    },
+    "Drama Club": {
+        "description": "Practice acting, stagecraft, and put on school performances",
+        "schedule": "Thursdays, 4:00 PM - 5:30 PM",
+        "max_participants": 20,
+        "participants": ["mia@mergington.edu", "leah@mergington.edu"]
+    },
+    "Math Olympiad": {
+        "description": "Solve challenging math problems and prepare for competitions",
+        "schedule": "Wednesdays, 3:30 PM - 5:00 PM",
+        "max_participants": 14,
+        "participants": ["oliver@mergington.edu", "stella@mergington.edu"]
+    },
+    "Science Club": {
+        "description": "Conduct experiments and explore science topics together",
+        "schedule": "Fridays, 3:30 PM - 5:00 PM",
+        "max_participants": 18,
+        "participants": ["ethan@mergington.edu", "zoe@mergington.edu"]
+    },
+    "Volleyball Team": {
+        "description": "Join the school volleyball team for training and matches",
+        "schedule": "Tuesdays and Fridays, 4:00 PM - 5:30 PM",
+        "max_participants": 14,
+        "participants": ["hannah@mergington.edu", "jacob@mergington.edu"]
+    },
+    "Soccer Team": {
+        "description": "Join the school soccer team for practices and league play",
+        "schedule": "Wednesdays and Saturdays, 4:00 PM - 6:00 PM",
+        "max_participants": 18,
+        "participants": ["natalie@mergington.edu", "ryan@mergington.edu"]
+    },
+    "Tennis Club": {
+        "description": "Learn tennis techniques and compete in friendly tournaments",
+        "schedule": "Mondays and Wednesdays, 3:30 PM - 5:00 PM",
+        "max_participants": 12,
+        "participants": ["luke@mergington.edu", "grace@mergington.edu"]
+    },
+    "Music Band": {
+        "description": "Play instruments and perform in school concerts and events",
+        "schedule": "Tuesdays and Thursdays, 4:30 PM - 5:30 PM",
+        "max_participants": 25,
+        "participants": ["mason@mergington.edu", "chloe@mergington.edu"]
+    },
+    "Dance Ensemble": {
+        "description": "Learn choreography, rehearse dance routines, and perform together",
+        "schedule": "Fridays, 4:00 PM - 6:00 PM",
+        "max_participants": 20,
+        "participants": ["zoey@mergington.edu", "ethan@mergington.edu"]
+    },
+    "Photography Club": {
+        "description": "Learn photography techniques and showcase creative work",
+        "schedule": "Wednesdays, 3:30 PM - 5:00 PM",
+        "max_participants": 15,
+        "participants": ["noah@mergington.edu", "sophia@mergington.edu"]
+    },
+    "Ceramics Club": {
+        "description": "Create pottery, sculptures, and ceramic artworks in a studio setting",
+        "schedule": "Mondays, 3:30 PM - 5:00 PM",
+        "max_participants": 14,
+        "participants": ["isla@mergington.edu", "miles@mergington.edu"]
+    },
+    "Debate Team": {
+        "description": "Develop argumentation skills and compete in debate competitions",
+        "schedule": "Thursdays, 3:30 PM - 5:00 PM",
+        "max_participants": 16,
+        "participants": ["aiden@mergington.edu", "isabella@mergington.edu"]
+    },
+    "Robotics Club": {
+        "description": "Design, build, and program robots for school competitions",
+        "schedule": "Thursdays, 3:30 PM - 5:30 PM",
+        "max_participants": 16,
+        "participants": ["ryan@mergington.edu", "emma@mergington.edu"]
+    },
+    "Literature Circle": {
+        "description": "Read and discuss books, poems, and creative writing together",
+        "schedule": "Wednesdays, 4:00 PM - 5:30 PM",
+        "max_participants": 18,
+        "participants": ["mia@mergington.edu", "leo@mergington.edu"]
+    },
+    "Model United Nations": {
+        "description": "Represent countries and develop diplomacy and public speaking skills",
+        "schedule": "Mondays, 3:30 PM - 5:00 PM",
+        "max_participants": 20,
+        "participants": ["ben@mergington.edu", "claire@mergington.edu"]
     }
 }
 
@@ -61,7 +168,24 @@ def signup_for_activity(activity_name: str, email: str):
 
     # Get the specific activity
     activity = activities[activity_name]
+    # Validate student is not already signed up
+    if email in activity["participants"]:
+        raise HTTPException(status_code=400, detail="Student is already signed up for this activity")
 
     # Add student
     activity["participants"].append(email)
     return {"message": f"Signed up {email} for {activity_name}"}
+
+
+@app.delete("/activities/{activity_name}/participants")
+def remove_participant(activity_name: str, email: str):
+    """Unregister a student from an activity"""
+    if activity_name not in activities:
+        raise HTTPException(status_code=404, detail="Activity not found")
+
+    activity = activities[activity_name]
+    if email not in activity["participants"]:
+        raise HTTPException(status_code=404, detail="Participant not found")
+
+    activity["participants"].remove(email)
+    return {"message": f"Unregistered {email} from {activity_name}"}

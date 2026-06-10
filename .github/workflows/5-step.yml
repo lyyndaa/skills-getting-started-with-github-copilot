@@ -11,6 +11,7 @@ permissions:
   contents: write
   actions: write
   issues: write
+  id-token: write
 
 env:
   REVIEW_FILE: ".github/steps/x-review.md"

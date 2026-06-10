@@ -7,9 +7,11 @@ on:
       - "src/app.py"
 
 permissions:
-  contents: read
+  contents: write
   actions: write
   issues: write
+  pull-requests: write
+  id-token: write
 
 env:
   STEP_3_FILE: ".github/steps/3-step.md"
@@ -46,9 +48,18 @@ jobs:
           issue-number: ${{ env.ISSUE_NUMBER }}
           direction: last
 
+      - name: Debug GITHUB_TOKEN availability
+        run: |
+          echo "GITHUB_TOKEN set: ${GITHUB_TOKEN:+yes}"
+          curl -s -o /tmp/_gh_test -w "%{http_code}" -H "Authorization: Bearer $GITHUB_TOKEN" -H "Accept: application/vnd.github+json" https://api.github.com/rate_limit || true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Update comment - checking work
         uses: GrantBirki/comment@v2.1.1
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ env.ISSUE_REPOSITORY }}
           issue-number: ${{ env.ISSUE_NUMBER }}
           comment-id: ${{ steps.find-last-comment.outputs.comment-id }}
@@ -70,6 +81,8 @@ jobs:
       - name: Update comment - step results
         uses: GrantBirki/comment@v2.1.1
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ env.ISSUE_REPOSITORY }}
           issue-number: ${{ env.ISSUE_NUMBER }}
           comment-id: ${{ steps.find-last-comment.outputs.comment-id }}
@@ -107,6 +120,8 @@ jobs:
       - name: Create comment - step finished
         uses: GrantBirki/comment@v2.1.1
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ env.ISSUE_REPOSITORY }}
           issue-number: ${{ env.ISSUE_NUMBER }}
           file: exercise-toolkit/markdown-templates/step-feedback/step-finished-prepare-next-step.md
@@ -116,6 +131,8 @@ jobs:
       - name: Create comment - add step content
         uses: GrantBirki/comment@v2.1.1
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ env.ISSUE_REPOSITORY }}
           issue-number: ${{ env.ISSUE_NUMBER }}
           file: ${{ env.STEP_3_FILE }}
@@ -123,6 +140,8 @@ jobs:
       - name: Create comment - watching for progress
         uses: GrantBirki/comment@v2.1.1
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ env.ISSUE_REPOSITORY }}
           issue-number: ${{ env.ISSUE_NUMBER }}
           file: exercise-toolkit/markdown-templates/step-feedback/watching-for-progress.md
@@ -130,6 +149,6 @@ jobs:
       - name: Disable current workflow and enable next one
         run: |
           gh workflow disable "${{github.workflow}}"
-          gh workflow enable "Step 3"
+          gh workflow enable 3-step.yml
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

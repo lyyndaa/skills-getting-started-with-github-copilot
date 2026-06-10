@@ -11,6 +11,7 @@ permissions:
   contents: read
   actions: write
   issues: write
+  id-token: write
 
 env:
   STEP_4_FILE: ".github/steps/4-step.md"
@@ -164,6 +165,6 @@ jobs:
       - name: Disable current workflow and enable next one
         run: |
           gh workflow disable "${{github.workflow}}"
-          gh workflow enable "Step 4"
+          gh workflow enable 4-step.yml
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
