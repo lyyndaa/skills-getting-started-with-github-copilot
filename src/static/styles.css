@@ -88,14 +88,41 @@ section h3 {
 }
 
 .participants-card ul {
-  list-style: disc inside;
+  list-style: none;
   margin: 0;
-  padding-left: 18px;
+  padding-left: 0;
 }
 
 .participants-card li {
-  margin-bottom: 4px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
   color: #333;
+}
+
+.participant-name {
+  flex: 1;
+}
+
+.remove-participant {
+  background: transparent;
+  border: none;
+  color: #c62828;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.remove-participant:hover {
+  color: #b71c1c;
+}
+
+.remove-participant:focus {
+  outline: 2px solid #90caf9;
+  outline-offset: 2px;
 }
 
 .no-participants {
