@@ -10,6 +10,7 @@ permissions:
   contents: read
   actions: write
   issues: write
+  pull-requests: write
 
 env:
   STEP_3_FILE: ".github/steps/3-step.md"
@@ -49,6 +50,7 @@ jobs:
       - name: Update comment - checking work
         uses: GrantBirki/comment@v2.1.1
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ env.ISSUE_REPOSITORY }}
           issue-number: ${{ env.ISSUE_NUMBER }}
           comment-id: ${{ steps.find-last-comment.outputs.comment-id }}
@@ -70,6 +72,7 @@ jobs:
       - name: Update comment - step results
         uses: GrantBirki/comment@v2.1.1
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ env.ISSUE_REPOSITORY }}
           issue-number: ${{ env.ISSUE_NUMBER }}
           comment-id: ${{ steps.find-last-comment.outputs.comment-id }}
@@ -107,6 +110,7 @@ jobs:
       - name: Create comment - step finished
         uses: GrantBirki/comment@v2.1.1
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ env.ISSUE_REPOSITORY }}
           issue-number: ${{ env.ISSUE_NUMBER }}
           file: exercise-toolkit/markdown-templates/step-feedback/step-finished-prepare-next-step.md
@@ -116,6 +120,7 @@ jobs:
       - name: Create comment - add step content
         uses: GrantBirki/comment@v2.1.1
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ env.ISSUE_REPOSITORY }}
           issue-number: ${{ env.ISSUE_NUMBER }}
           file: ${{ env.STEP_3_FILE }}
@@ -123,6 +128,7 @@ jobs:
       - name: Create comment - watching for progress
         uses: GrantBirki/comment@v2.1.1
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ env.ISSUE_REPOSITORY }}
           issue-number: ${{ env.ISSUE_NUMBER }}
           file: exercise-toolkit/markdown-templates/step-feedback/watching-for-progress.md
